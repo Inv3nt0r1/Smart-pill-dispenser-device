@@ -4,8 +4,8 @@
  * Durgesh Pachghare  9 January 2019
  */
 
-#include <Wire.h>
 
+#include <Wire.h>
 
 //char *test = "$GPRMC";
 
@@ -41,6 +41,7 @@
 #define PWRUPDATE 0x1E
 #define PWRUPMTH 0x1F
 
+#define DEBUG 1
 //variables used here
 
 byte rtcSeconds, rtcMinutes, rtcHours;
@@ -240,13 +241,13 @@ void rtcGetTime()
     rtcDay = (rtcDay >> 4) * 10 + (rtcDay & 0x0F);
     rtcMonth = ((rtcMonth >> 4) & 0x01) * 10 + (rtcMonth & 0x0F);
     rtcYear = (rtcYear >> 4) * 10 + (rtcYear & 0x0F);
-
-    //print everything out
-    //Serial.print(rtcHours);
-    //Serial.print(":");
-    //Serial.print(rtcMinutes);
-    //Serial.print(":");
-    //Serial.print(rtcSeconds);
+    #ifdef DEBUG
+      Serial.print(rtcHours); 
+      Serial.print(":");  
+      Serial.print(rtcMinutes); 
+      Serial.print(":");  
+      Serial.print(rtcSeconds); 
+    #endif
 
     if (rtc12hrMode == true && rtcPM == true)
       Serial.print(" PM ");
@@ -256,14 +257,16 @@ void rtcGetTime()
     if (rtc12hrMode == false)
       Serial.print(" 24hr ");
 
-    //Serial.print("WeekDay=");
-    //Serial.print(rtcWeekDay);
-    //Serial.print(weekDay[rtcWeekDay - 1]);
-    //Serial.print(" ");
-    //Serial.print(rtcMonth);
-  //Serial.print("/");
-  //Serial.print(rtcDay);
-    //Serial.print("/");
-    //Serial.print(rtcYear);
-    //Serial.println("");
+    #ifdef DEBUG
+      Serial.print("WeekDay="); 
+      Serial.print(rtcWeekDay); 
+      Serial.print(weekDay[rtcWeekDay - 1]);  
+      Serial.print(" ");  
+      Serial.print(rtcMonth); 
+      Serial.print("/");  
+      Serial.print(rtcDay); 
+      Serial.print("/");  
+      Serial.print(rtcYear);  
+      Serial.println(""); 
+    #endif
 }
