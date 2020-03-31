@@ -1,1 +1,2 @@
-This is the the repository for arduino code for Pill Dispenser Device. 
+The repository contains practise and testing arduino codes for smart pill dispenser device.
+  
